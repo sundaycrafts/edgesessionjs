@@ -1,4 +1,4 @@
-import {Result} from "./result.ts";
+import {Result} from "./util/result";
 
 export class Hex {
     private constructor(private readonly buf: Uint8Array) {
@@ -14,7 +14,7 @@ export class Hex {
         return this.buf;
     }
 
-    static tryFromString(hex: string): Result<Hex> {
+    static tryFromString(hex: string): Result<Hex, Error> {
         if (hex.length % 2 !== 0) {
             return {
                 success: false,

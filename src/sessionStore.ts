@@ -1,4 +1,4 @@
-import {Result} from "./result";
+import {Result} from "./util/result";
 import {Nil} from "./util/nil";
 
 export type SessionStore<E = Error> = {

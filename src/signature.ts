@@ -1,6 +1,6 @@
 import {algorithm, Keyholder} from "./keyholder";
-import {Result} from "./result";
-import {Hex} from "./hex.ts";
+import {Result} from "./util/result";
+import {Hex} from "./hex";
 
 export class Signature {
     private readonly key: Keyholder;
@@ -19,7 +19,7 @@ export class Signature {
         return message + "." + Hex.fromArrayBuffer(buf).toString();
     }
 
-    async unsign(signed: string): Promise<Result<string>> {
+    async unsign(signed: string): Promise<Result<string, Error>> {
         const pair = signed.split(".");
 
         if (pair.length !== 2) {

@@ -37,7 +37,7 @@ export type SessionState<
  * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies */
 const SESSION_KEY = "__Host-session" as const;
 
-export class Session<ReqC extends RequestCookies, ResC extends ResponseCookies, E = Error> {
+export class EdgeSession<ReqC extends RequestCookies, ResC extends ResponseCookies, E = Error> {
     constructor(
         private readonly signature: Signature,
         private readonly store: SessionStore<E>
