@@ -2,7 +2,7 @@ import {Signature} from "./signature.ts";
 import {SessionStore} from "./sessionStore.ts";
 import {RequestCookies, ResponseCookies} from "./cookies.ts";
 import {Serializable} from "./util/serializable.ts";
-import {Err, Result} from "./util/result.ts";
+import {Result} from "./util/result.ts";
 import {Nil} from "./util/nil.ts";
 import {DateTime} from "./DateTime.ts";
 
@@ -119,7 +119,7 @@ export class EdgeSession<ReqC extends RequestCookies, ResC extends ResponseCooki
         if (!sessionId) return {success: true, data: undefined}
 
         const res = await this.store.delAll(sessionId)
-        if (!res.success) return {success: false, error: res.error}
+        if (!res.success) return res
 
         cookies.delete(SESSION_KEY);
         return res
@@ -134,7 +134,7 @@ export class EdgeSession<ReqC extends RequestCookies, ResC extends ResponseCooki
 
         const index = this.index(sessionId, "flash", label);
         const res = await this.store.get(index);
-        if (!res.success) return {success: false, error: res.error}
+        if (!res.success) return {success: false, error: res.error};
         return {success: true, data: res.data !== undefined}
     }
 
@@ -148,10 +148,10 @@ export class EdgeSession<ReqC extends RequestCookies, ResC extends ResponseCooki
         // TODO: to be transactional
         const index = this.index(sessionId, "flash", label);
         const res = await this.store.del(index)
-        if (!res.success) return {success: false, error: res.error}
+        if (!res.success) return res;
 
         const res2 = await this.store.del(index)
-        if (!res2.success) return {success: false, error: res2.error}
+        if (!res2.success) return res2;
 
         return res;
     }
