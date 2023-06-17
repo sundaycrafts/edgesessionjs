@@ -8,6 +8,15 @@ export interface RequestCookies extends Cookies {
 }
 
 export interface ResponseCookies extends Cookies {
-    set(p: any): void;
+    set(options: {
+        name: string;
+        value: string;
+        expires?: Date | number;
+        maxAge?: number;
+        sameSite?: "strict";
+        httpOnly?: boolean;
+        path?: string;
+        secure: true;
+    }): void;
     delete(name: string): void;
 }
