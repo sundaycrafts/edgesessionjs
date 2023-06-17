@@ -4,7 +4,7 @@ import {RequestCookies, ResponseCookies} from "./cookies";
 import {Serializable} from "./util/serializable";
 import {Result} from "./util/result";
 import {Nil} from "./util/nil";
-import {DateTime} from "./DateTime.ts";
+import {DateTime} from "./DateTime";
 
 /** `data:${session_id}:${label}` */
 type DataID = `data:${string}:${string}`;
