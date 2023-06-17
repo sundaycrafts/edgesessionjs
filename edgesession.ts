@@ -5,7 +5,6 @@ import {RequestCookies, ResponseCookies} from "./cookies";
 import {Serializable} from "./util/serializable";
 import {Result} from "./util/result";
 import {Nil} from "./util/nil";
-import {lift} from "./util/lift";
 
 /** `data:${session_id}:${label}` */
 type DataID = `data:${string}:${string}`;
@@ -38,10 +37,10 @@ export type SessionState<
  * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies */
 const SESSION_KEY = "__Host-session" as const;
 
-export class Session<ReqC extends RequestCookies, ResC extends ResponseCookies> {
+export class Session<ReqC extends RequestCookies, ResC extends ResponseCookies, E = Error> {
     constructor(
         private readonly signature: Signature,
-        private readonly store: SessionStore
+        private readonly store: SessionStore<E>
     ) {
     }
 
@@ -88,13 +87,13 @@ export class Session<ReqC extends RequestCookies, ResC extends ResponseCookies> 
         return sessionId;
     }
 
-    async get<S extends SessionState<any, any, false>, E>(
+    async get<S extends SessionState<any, any, false>>(
         cookies: ReqC | ResC,
         label: S["key"]
     ): Promise<Result<string | Nil, E>> {
         const id = await this.sessionIdFromCookies(cookies);
         if (!id) return {success: true, data: undefined};
-        return lift<E, string | Nil>(() => this.store.get(this.index(id, "data", label)))()
+        return this.store.get(this.index(id, "data", label))
     }
 
     async commit<S extends SessionState<any, any, false>>(
@@ -102,24 +101,24 @@ export class Session<ReqC extends RequestCookies, ResC extends ResponseCookies> 
         label: S["key"],
         value: S["value"] | undefined,
         expiresIn: DateTime = DateTime.now().plus({months: 1})
-    ): Promise<Result<void, Error>> {
+    ): Promise<Result<void, E>> {
         const sessionId = await this.putSessionIdToCookies(cookies, expiresIn);
         const key = this.index(sessionId, "data", label);
 
         if (value === undefined || value === null) {
-            return lift<Error, void>(() => this.store.del(key))()
+            return this.store.del(key)
         } else {
-            return lift<Error, void>(() => this.store.set(key, value.toString()))()
+            return this.store.set(key, value.toString())
         }
     }
 
     async destroy(
         cookies: ResC
-    ): Promise<Result<void, Error>> {
+    ): Promise<Result<void, E>> {
         const sessionId = await this.sessionIdFromCookies(cookies);
         if (!sessionId) return {success: true, data: undefined}
 
-        const res = await lift<Error, void>(() => this.store.delAll(sessionId))()
+        const res = await this.store.delAll(sessionId)
         if (!res.success) return {success: false, error: res.error}
 
         cookies.delete(SESSION_KEY);
@@ -129,26 +128,29 @@ export class Session<ReqC extends RequestCookies, ResC extends ResponseCookies> 
     async hasFlash<S extends SessionState<any, any, true>>(
         cookies: ReqC | ResC,
         label: S["key"]
-    ): Promise<Result<boolean, Error>> {
+    ): Promise<Result<boolean, E>> {
         const sessionId = await this.sessionIdFromCookies(cookies);
         if (!sessionId) return {success: true, data: false};
 
         const index = this.index(sessionId, "flash", label);
-        return await lift<Error, boolean>(async () => typeof await this.store.get(index) === "string")()
+        const res = await this.store.get(index);
+        if (!res.success) return {success: false, error: res.error}
+        return {success: true, data: res.data !== undefined}
     }
 
     async getFlash<S extends SessionState<any, any, true>>(
         cookies: ReqC | ResC,
         label: S["key"]
-    ): Promise<Result<unknown, Error>> {
+    ): Promise<Result<unknown, E>> {
         const sessionId = await this.sessionIdFromCookies(cookies);
         if (!sessionId) return {success: true, data: undefined};
 
+        // TODO: to be transactional
         const index = this.index(sessionId, "flash", label);
-        const res = await lift<Error, unknown>(() => this.store.del(index))();
+        const res = await this.store.del(index)
         if (!res.success) return {success: false, error: res.error}
 
-        const res2 = await lift<Error, void>(() => this.store.del(index))();
+        const res2 = await this.store.del(index)
         if (!res2.success) return {success: false, error: res2.error}
 
         return res;
@@ -157,9 +159,9 @@ export class Session<ReqC extends RequestCookies, ResC extends ResponseCookies> 
     async commitFlash<S extends SessionState<any, any, true>>(
         cookies: ResC,
         label: S["key"],
-        value: S["value"] | undefined,
+        value: S["value"] | Nil,
         lifetime: number = 120
-    ): Promise<Result<void, Error>> {
+    ): Promise<Result<void, E>> {
         if (value === undefined || value === null) return {success: true, data: undefined};
         const sessionId = await this.putSessionIdToCookies(
             cookies,
@@ -167,6 +169,6 @@ export class Session<ReqC extends RequestCookies, ResC extends ResponseCookies> 
         );
         const index = this.index(sessionId, "flash", label);
 
-        return lift<Error, void>(() => this.store.set(index, value.toString()))()
+        return this.store.set(index, value.toString())
     }
 }

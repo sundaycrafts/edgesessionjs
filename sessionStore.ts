@@ -1,8 +1,11 @@
-export type SessionStore = {
-    set: (key: string, value: string) => void | Promise<void>;
+import {Result} from "./result";
+import {Nil} from "./util/nil";
+
+export type SessionStore<E = Error> = {
+    set: (key: string, value: string) => Result<void, E> | Promise<Result<void, E>>;
     get: (
         key: string
-    ) => string | undefined | null | Promise<string | undefined | null>;
-    del: (key: string) => void | Promise<void>;
-    delAll: (prefix: string) => void | Promise<void>;
+    ) => Result<string | Nil, E> | Promise<Result<string | Nil, E>>
+    del: (key: string) => Result<void, E> | Promise<Result<void, E>>;
+    delAll: (prefix: string) => Result<void, E> | Promise<Result<void, E>>;
 };
