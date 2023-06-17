@@ -1,10 +1,10 @@
-import {DateTime} from "luxon";
 import {Signature} from "./signature";
 import {SessionStore} from "./sessionStore";
 import {RequestCookies, ResponseCookies} from "./cookies";
 import {Serializable} from "./util/serializable";
 import {Result} from "./util/result";
 import {Nil} from "./util/nil";
+import {DateTime} from "./util/DateTime.ts";
 
 /** `data:${session_id}:${label}` */
 type DataID = `data:${string}:${string}`;

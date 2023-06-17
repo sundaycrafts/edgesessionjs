@@ -3,15 +3,9 @@
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
-    "@types/luxon": "^3.3.0",
     "bun-types": "^0.6.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "luxon": "^3.3.0",
-    "next": "^13.4.6",
-    "zod": "^3.21.4"
   }
 }
