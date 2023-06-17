@@ -1,2 +1,2 @@
-export { lift } from "./lift";
-export { Result } from "./result";
+export { lift } from "./lift.ts";
+export { Result } from "./result.ts";

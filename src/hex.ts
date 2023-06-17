@@ -1,4 +1,4 @@
-import {Result} from "./util/result";
+import {Result} from "./util/result.ts";
 
 export class Hex {
     private constructor(private readonly buf: Uint8Array) {

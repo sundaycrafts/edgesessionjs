@@ -1,4 +1,4 @@
-import {Nil} from "./util/nil";
+import {Nil} from "./util/nil.ts";
 
 interface Cookies {
     get(name: string): Nil | { value: string | Nil };

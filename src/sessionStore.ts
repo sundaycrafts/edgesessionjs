@@ -1,5 +1,5 @@
-import {Result} from "./util/result";
-import {Nil} from "./util/nil";
+import {Result} from "./util/result.ts";
+import {Nil} from "./util/nil.ts";
 
 export type SessionStore<E = Error> = {
     set: (key: string, value: string) => Result<void, E> | Promise<Result<void, E>>;

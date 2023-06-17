@@ -1,4 +1,4 @@
-import {Result} from "./result";
+import {Result} from "./result.ts";
 
 export function lift<E, Out, In extends any[] = never[]>(fn: (...i: In) => Out | Promise<Out>): (...i: In) => Promise<Result<Out, E>> {
     return async (...i: In) => {
