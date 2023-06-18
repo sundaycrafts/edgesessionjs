@@ -2,6 +2,7 @@
   "name": "edgesession",
   "license": "SEE LICENSE IN LICENSE",
   "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "main": "out/index.js",
   "module": "src/index.ts",
   "type": "module",

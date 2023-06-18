@@ -1,26 +1,16 @@
 import {Signature} from "./signature.ts";
 import {SessionStore} from "./sessionStore.ts";
 import {RequestCookies, ResponseCookies} from "./cookies.ts";
-import {Serializable} from "./util/serializable.ts";
 import {Result} from "./util/result.ts";
 import {Nil} from "./util/nil.ts";
 import {DateTime} from "./DateTime.ts";
+import {SessionState} from "./sessionState.ts";
 
 /** `data:${session_id}:${label}` */
 type DataID = `data:${string}:${string}`;
 
 /** `flash:${session_id}:${label}` */
 type FlashID = `flash:${string}:${string}`;
-
-export type SessionState<
-    K extends string,
-    V extends Serializable,
-    F extends boolean = false
-> = {
-    key: K;
-    value: V;
-    flash: F;
-};
 
 /**
  * If a cookie name has `__Host-` prefix,
