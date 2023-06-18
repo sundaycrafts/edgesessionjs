@@ -19,6 +19,7 @@
     "allowJs": true,
     "emitDeclarationOnly": true,
     "declaration": true,
+    "rootDir": "./src",
     "outDir": "./out",
     "types": [
       "bun-types" // add Bun global

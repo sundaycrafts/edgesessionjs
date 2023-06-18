@@ -1,13 +1,13 @@
 {
   "name": "edgesession",
   "license": "SEE LICENSE IN LICENSE",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "main": "out/index.js",
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
-    "build": "bun build --outdir=out src/index.ts & tsc",
-    "publish": "npm run build && npm publish --access public",
+    "build": "bun build --outdir=out src/index.ts src/util/index.ts & tsc",
+    "pub": "npm run build && npm publish --access public",
     "test": "echo \"Error: use bun test\" && exit 1"
   },
   "devDependencies": {
