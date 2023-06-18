@@ -1,8 +1,11 @@
 {
-  "files": ["src/index.ts"],
+  "include": [
+    "src/**/*"
+  ],
   "compilerOptions": {
     "lib": ["ESNext"],
     "module": "esnext",
+    "composite": true,
     "target": "esnext",
     "moduleResolution": "bundler",
     "moduleDetection": "force",
