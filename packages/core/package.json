@@ -3,7 +3,6 @@
   "license": "Apache-2.0",
   "version": "0.0.1-alpha.3",
   "main": "lib/index.js",
-  "module": "src/index.ts",
   "type": "module",
   "scripts": {
     "build": "bun build --outdir=lib src/index.ts src/util/index.ts & tsc",
