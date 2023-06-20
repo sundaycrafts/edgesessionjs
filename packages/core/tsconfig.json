@@ -20,7 +20,7 @@
     "emitDeclarationOnly": true,
     "declaration": true,
     "rootDir": "./src",
-    "outDir": "./out",
+    "outDir": "./lib",
     "types": [
       "bun-types" // add Bun global
     ]
