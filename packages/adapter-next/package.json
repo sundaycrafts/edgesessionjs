@@ -1,8 +1,8 @@
 {
   "name": "@edgesession/adapter-next-kv",
   "license": "Apache-2.0",
-  "version": "0.0.1-alpha.8",
-  "module": "lib/index.js",
+  "version": "0.0.1-alpha.9",
+  "main": "lib/index.js",
   "type": "module",
   "scripts": {
     "build": "bun build --outdir=lib src/index.ts & tsc",
