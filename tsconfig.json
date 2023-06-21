@@ -14,8 +14,7 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
-    "emitDeclarationOnly": true,
-    "declaration": true,
+    "noEmit": true,
     "types": [
       "bun-types" // add Bun global
     ]
