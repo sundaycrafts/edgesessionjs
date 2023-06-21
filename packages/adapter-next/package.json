@@ -1,7 +1,7 @@
 {
   "name": "@edgesession/adapter-next-kv",
   "license": "Apache-2.0",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1-alpha.6",
   "module": "lib/index.ts",
   "type": "module",
   "scripts": {
@@ -12,6 +12,9 @@
   "files": [
     "lib"
   ],
+  "exports": {
+    ".": "./lib/index.ts"
+  },
   "devDependencies": {
     "bun-types": "^0.6.0",
     "typescript": "^5.1.3",
