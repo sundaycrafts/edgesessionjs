@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "typecheck": "tsc",
-    "pub": "npm run build && npm publish --access public",
+    "pub": "pnpm publish --access public",
     "test": "echo \"Error: use bun test\" && exit 1"
   },
   "exports": {
