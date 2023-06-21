@@ -3,6 +3,6 @@
     "../../tsconfig.json"
   ],
   "include": [
-    "lib/**/*"
+    "src/**/*"
   ]
 }

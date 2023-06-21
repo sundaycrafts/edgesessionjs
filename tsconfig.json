@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "module": "esnext",
     "composite": true,
     "target": "esnext",
@@ -14,7 +16,8 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
-    "noEmit": true,
+    "emitDeclarationOnly": true,
+    "declaration": true,
     "types": [
       "bun-types" // add Bun global
     ]

@@ -2,7 +2,7 @@
   "name": "@edgesession/adapter-next-kv",
   "license": "Apache-2.0",
   "version": "0.0.1-alpha.6",
-  "module": "lib/index.ts",
+  "module": "src/index.ts",
   "type": "module",
   "scripts": {
     "typecheck": "tsc",
@@ -10,7 +10,7 @@
     "test": "echo \"Error: use bun test\" && exit 1"
   },
   "files": [
-    "lib"
+    "src"
   ],
   "exports": {
     ".": "./lib/index.ts"
