@@ -1,13 +1,13 @@
 {
   "name": "edgesession",
   "license": "Apache-2.0",
-  "version": "0.0.1-alpha.6",
+  "version": "0.0.1-alpha.7",
   "main": "lib/index.js",
   "type": "module",
   "scripts": {
     "typecheck": "tsc",
     "build": "bun build --outdir=lib src/index.ts src/util/index.ts & tsc",
-    "pub": "rm -rf ./lib && pnpm run build && pnpm publish --access public",
+    "pub": "rm -rf ./lib tsconfig.tsbuildinfo && npm run build && pnpm publish --access public",
     "test": "echo \"Error: use bun test\" && exit 1"
   },
   "exports": {
