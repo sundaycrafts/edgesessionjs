@@ -7,7 +7,7 @@
   "scripts": {
     "typecheck": "tsc",
     "build": "bun build --outdir=lib src/index.ts src/util/index.ts & tsc",
-    "pub": "pnpm publish --access public",
+    "pub": "rm -rf ./lib && pnpm run build && pnpm publish --access public",
     "test": "echo \"Error: use bun test\" && exit 1"
   },
   "exports": {
