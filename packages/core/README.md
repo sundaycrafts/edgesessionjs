@@ -1,15 +1,7 @@
 # edgesession
 
-To install dependencies:
+A session manager for edge runtime.
 
-```bash
-bun install
-```
+## Usage
 
-To build:
-
-```bash
-bun build --outdir=out ./src/index.ts
-```
-
-This project was created using `bun init` in bun v0.6.8. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+Use with adapter [@edgesession/adapter-next-kv](https://www.npmjs.com/package/@edgesession/adapter-next-kv).

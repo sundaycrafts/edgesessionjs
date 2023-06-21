@@ -1,7 +1,15 @@
 {
   "name": "edgesession",
   "license": "Apache-2.0",
-  "version": "0.0.1-alpha.7",
+  "version": "0.0.1-alpha.8",
+  "description": "Session manager for edge runtime",
+  "keywords": ["edge", "session"],
+  "homepage": "https://github.com/sundaycrafts/edgesessionjs/blob/main/packages/core/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sundaycrafts/edgesessionjs.git",
+    "directory": "packages/core"
+  },
   "main": "lib/index.js",
   "type": "module",
   "scripts": {
