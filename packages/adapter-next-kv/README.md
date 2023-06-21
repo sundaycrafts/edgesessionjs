@@ -1,4 +1,4 @@
-# adapter-next
+# @edgesession/adapter-next-kv
 
 To install dependencies:
 
