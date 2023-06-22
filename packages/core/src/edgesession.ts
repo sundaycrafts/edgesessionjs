@@ -137,13 +137,13 @@ export class EdgeSession<ReqC extends RequestCookies, ResC extends ResponseCooki
 
         // TODO: to be transactional
         const index = this.index(sessionId, "flash", label);
-        const res = await this.store.del(index)
+        const res = await this.store.get(index);
         if (!res.success) return res;
 
         const res2 = await this.store.del(index)
         if (!res2.success) return res2;
 
-        return res;
+        return { success: true, data: res.data || undefined };
     }
 
     async commitFlash<S extends SessionState<any, any, true>>(

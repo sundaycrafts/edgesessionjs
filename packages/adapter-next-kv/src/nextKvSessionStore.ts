@@ -24,7 +24,7 @@ export class NextKvSessionStore implements SessionStore {
     async get(key: string): Promise<Result<string | Nil, Error>> {
         const res = await lift<Error, string | null>(() => this.client.get(key))();
         if (!res.success) return res;
-        return {...res, data: JSON.stringify(res.data || "")};
+        return {...res, data: res.data ? JSON.stringify(res.data) : null};
     }
 
     async set(key: string, value: string): Promise<Result<void, Error>> {
