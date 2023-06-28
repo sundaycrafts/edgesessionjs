@@ -22,6 +22,9 @@
     ".": "./lib/index.js",
     "./util": "./lib/util/index.js"
   },
+  "publishConfig": {
+    "directory": "lib"
+  },
   "files": [
     "lib"
   ],
