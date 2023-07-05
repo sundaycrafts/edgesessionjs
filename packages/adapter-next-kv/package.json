@@ -1,7 +1,7 @@
 {
   "name": "@edgesession/adapter-next-kv",
   "license": "Apache-2.0",
-  "version": "0.0.1-alpha.13",
+  "version": "0.0.1-alpha.14",
   "description": "EdgeSession adapter for Next.js using Vercel KV storage",
   "keywords": ["edge", "session", "next", "kv"],
   "homepage": "https://github.com/sundaycrafts/edgesessionjs/blob/main/packages/adapter-next-kv/README.md",

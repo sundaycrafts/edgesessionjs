@@ -104,18 +104,20 @@ const wrote = await tri<Error, void>(() => {
         exports: Object.entries(pkg.exports).reduce(
           (acc, [key, filepath]) => ({
             ...acc,
-            [key]: path.join(
-              path
-                .dirname(filepath)
-                .split(path.sep)
-                .filter(
-                  (node) =>
-                    path.normalize(node) !==
-                    path.normalize(tsconfig.compilerOptions.rootDir)
-                )
-                .join(path.sep),
-              path.basename(filepath, path.extname(filepath)) + ".js"
-            ),
+            [key]:
+              "./" +
+              path.join(
+                path
+                  .dirname(filepath)
+                  .split(path.sep)
+                  .filter(
+                    (node) =>
+                      path.normalize(node) !==
+                      path.normalize(tsconfig.compilerOptions.rootDir)
+                  )
+                  .join(path.sep),
+                path.basename(filepath, path.extname(filepath)) + ".js"
+              ),
           }),
           {} as { [key: string]: string }
         ),
