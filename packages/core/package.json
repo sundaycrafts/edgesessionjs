@@ -1,7 +1,7 @@
 {
   "name": "edgesession",
   "license": "Apache-2.0",
-  "version": "0.0.1-alpha.11",
+  "version": "0.0.1-alpha.12",
   "description": "Session manager for edge runtime",
   "keywords": ["edge", "session"],
   "homepage": "https://github.com/sundaycrafts/edgesessionjs/blob/main/packages/core/README.md",
@@ -17,8 +17,8 @@
     "test": "echo \"Error: use bun test\" && exit 1"
   },
   "exports": {
-    ".": "./ts/index.js",
-    "./util": "./ts/util/index.js"
+    ".": "./ts/index.ts",
+    "./util": "./ts/util/index.ts"
   },
   "publishConfig": {
     "directory": "js"
