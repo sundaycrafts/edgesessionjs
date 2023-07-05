@@ -3,10 +3,10 @@
     "../../tsconfig.json"
   ],
   "include": [
-    "src/**/*"
+    "**/*"
   ],
   "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "./lib"
+    "rootDir": "./ts",
+    "outDir": "./js"
   }
 }

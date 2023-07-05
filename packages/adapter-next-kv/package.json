@@ -1,33 +1,32 @@
 {
   "name": "@edgesession/adapter-next-kv",
   "license": "Apache-2.0",
-  "version": "0.0.1-alpha.12",
+  "version": "0.0.1-alpha.13",
   "description": "EdgeSession adapter for Next.js using Vercel KV storage",
   "keywords": ["edge", "session", "next", "kv"],
-  "homepage": "https://github.com/sundaycrafts/edgesessionjs/blob/main/packages/adapter-next/README.md",
+  "homepage": "https://github.com/sundaycrafts/edgesessionjs/blob/main/packages/adapter-next-kv/README.md",
   "repository": {
     "type": "git",
     "url": "https://github.com/sundaycrafts/edgesessionjs.git",
     "directory": "packages/adapter-next-kv"
   },
-  "main": "lib/index.js",
   "type": "module",
   "scripts": {
-    "build": "bun build --outdir=lib src/index.ts & tsc",
-    "pub": "rm -rf ./lib tsconfig.tsbuildinfo && npm run build && pnpm publish --access public",
+    "build": "../../scripts/bunbuild.ts ./ && tsc",
+    "pub": "pnpm publish --access public",
     "test": "echo \"Error: use bun test\" && exit 1"
   },
   "exports": {
-    ".": "./lib/index.js"
+    ".": "./ts/index.js"
   },
-  "files": [
-    "lib"
-  ],
+  "publishConfig": {
+    "directory": "js"
+  },
   "devDependencies": {
     "bun-types": "^0.6.0",
     "typescript": "^5.1.3",
     "@vercel/kv": "^0.2.1",
-    "edgesession": "^0.0.1-alpha.10"
+    "edgesession": "^0.0.1-alpha.11"
   },
   "peerDependencies": {
     "typescript": "^4.0.0 || ^5.0.0",

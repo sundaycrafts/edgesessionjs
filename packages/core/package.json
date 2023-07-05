@@ -1,7 +1,7 @@
 {
   "name": "edgesession",
   "license": "Apache-2.0",
-  "version": "0.0.1-alpha.10",
+  "version": "0.0.1-alpha.11",
   "description": "Session manager for edge runtime",
   "keywords": ["edge", "session"],
   "homepage": "https://github.com/sundaycrafts/edgesessionjs/blob/main/packages/core/README.md",
@@ -10,24 +10,19 @@
     "url": "https://github.com/sundaycrafts/edgesessionjs.git",
     "directory": "packages/core"
   },
-  "main": "lib/index.js",
   "type": "module",
   "scripts": {
-    "typecheck": "tsc",
-    "build": "bun build --outdir=lib src/index.ts src/util/index.ts & tsc",
-    "pub": "rm -rf ./lib tsconfig.tsbuildinfo && npm run build && pnpm publish --access public",
+    "build": "../../scripts/bunbuild.ts ./ && tsc",
+    "pub": "pnpm publish --access public",
     "test": "echo \"Error: use bun test\" && exit 1"
   },
   "exports": {
-    ".": "./lib/index.js",
-    "./util": "./lib/util/index.js"
+    ".": "./ts/index.js",
+    "./util": "./ts/util/index.js"
   },
   "publishConfig": {
-    "directory": "lib"
+    "directory": "js"
   },
-  "files": [
-    "lib"
-  ],
   "devDependencies": {
     "bun-types": "^0.6.0",
     "typescript": "^5.1.3"
