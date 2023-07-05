@@ -1,4 +1,4 @@
-import { Result } from "./result.ts";
+import { Result } from "./result";
 
 export function tri<E, Out, In extends any[] = never[]>(
   fn: (...i: In) => Out | Promise<Out>

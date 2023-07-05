@@ -1,6 +1,6 @@
-import { algorithm, Keyholder } from "./keyholder.ts";
+import { algorithm, Keyholder } from "./keyholder";
 import { Result } from "./util";
-import { Hex } from "./hex.ts";
+import { Hex } from "./hex";
 
 export class Signature {
   private readonly key: Keyholder;

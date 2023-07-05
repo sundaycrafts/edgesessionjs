@@ -1,4 +1,4 @@
-import { Serializable } from "./util/serializable.ts";
+import { Serializable } from "./util/serializable";
 
 export type SessionState<
   K extends string,

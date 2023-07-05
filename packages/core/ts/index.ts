@@ -1,5 +1,5 @@
-export type { SessionState } from "./sessionState.ts";
-export type { RequestCookies, ResponseCookies } from "./cookies.ts";
-export { SessionStore } from "./sessionStore.ts";
-export { Signature } from "./signature.ts";
-export { EdgeSession } from "./edgesession.ts";
+export type { SessionState } from "./sessionState";
+export type { RequestCookies, ResponseCookies } from "./cookies";
+export { SessionStore } from "./sessionStore";
+export { Signature } from "./signature";
+export { EdgeSession } from "./edgesession";

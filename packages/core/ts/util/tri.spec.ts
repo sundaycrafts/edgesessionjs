@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
-import { tri } from "./tri.ts";
-import { Err, Ok, Result } from "./result.ts";
+import { tri } from "./tri";
+import { Err, Ok, Result } from "./result";
 
 test("tri function success case", async () => {
   const successFn = (a: number, b: number) => a + b;

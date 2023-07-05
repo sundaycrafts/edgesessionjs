@@ -2,6 +2,7 @@
   "name": "edgesession-project",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/core/js",
+    "packages/adapter-next-kv/js"
   ]
 }

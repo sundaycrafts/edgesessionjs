@@ -1,1 +1,1 @@
-export { NextKvSessionStore } from "./nextKvSessionStore.ts"
+export { NextKvSessionStore } from "./nextKvSessionStore";

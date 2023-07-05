@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { Signature } from "./signature.ts";
+import { Signature } from "./signature";
 
 test("message is signed by deterministic algorithm", async () => {
   const sig = new Signature("secret");

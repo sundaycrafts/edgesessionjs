@@ -1,9 +1,9 @@
-import { Signature } from "./signature.ts";
-import { SessionStore } from "./sessionStore.ts";
-import { RequestCookies, ResponseCookies } from "./cookies.ts";
+import { Signature } from "./signature";
+import { SessionStore } from "./sessionStore";
+import { RequestCookies, ResponseCookies } from "./cookies";
 import { Result, Nil } from "./util";
-import { DateTime } from "./DateTime.ts";
-import { SessionState } from "./sessionState.ts";
+import { DateTime } from "./DateTime";
+import { SessionState } from "./sessionState";
 
 /** `data:${session_id}:${label}` */
 type DataID = `data:${string}:${string}`;
