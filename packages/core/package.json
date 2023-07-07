@@ -12,7 +12,7 @@
   },
   "type": "module",
   "scripts": {
-    "build": "../../scripts/bunbuild.ts ./ && tsc",
+    "build": "../../scripts/bunbuild.ts --tsconfig=./tsconfig.build.json && tsc --project ./tsconfig.build.json",
     "pub": "pnpm publish --access public",
     "test": "echo \"Error: use bun test\" && exit 1"
   },

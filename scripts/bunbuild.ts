@@ -3,7 +3,26 @@
 import * as fs from "fs/promises";
 import * as path from "path";
 
-const absBasePath = path.join(process.cwd(), process.argv[2] || "./");
+const args = process.argv.reduce(
+  (acc, arg) => {
+    const [_key, value] = arg.split("=");
+    const key = _key.replace("--", "");
+    return {
+      ...acc,
+      [key]: value,
+    };
+  },
+  {
+    base: undefined as string | undefined,
+    tsconfig: undefined as string | undefined,
+  }
+);
+
+const absBasePath = path.join(process.cwd(), args.base ?? "./");
+const absTsconfigPath = path.join(
+  process.cwd(),
+  args.tsconfig ?? "tsconfig.json"
+);
 
 export type TsConfig = {
   compilerOptions: {
@@ -44,16 +63,15 @@ export function tri<E, Out, In extends any[] = never[]>(
   };
 }
 
-const { default: tsconfig } = (await import(
-  path.join(absBasePath, "tsconfig.json")
-)) as { default: TsConfig };
+const { default: tsconfig } = (await import(path.join(absTsconfigPath))) as {
+  default: TsConfig;
+};
 const { default: pkg } = (await import(
   path.join(absBasePath, "package.json")
 )) as {
   default: Pkg;
 };
 
-console.log(`cleaning up ${tsconfig.compilerOptions.outDir} ...`);
 await fs.rm(tsconfig.compilerOptions.outDir, { recursive: true, force: true });
 
 const pkgFiles = pkg.files || [];
