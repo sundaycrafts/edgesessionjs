@@ -3,7 +3,11 @@
     "../../tsconfig.json"
   ],
   "include": [
-    "**/*"
+    "**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "ts/**/*.spec.ts"
   ],
   "compilerOptions": {
     "rootDir": "./ts",
