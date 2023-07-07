@@ -1,8 +1,8 @@
-import { Serializable } from "./util/serializable";
+import { StateValue } from "./stateValue";
 
 export type SessionState<
   K extends string,
-  V extends Serializable,
+  V extends StateValue,
   F extends boolean = false
 > = {
   key: K;

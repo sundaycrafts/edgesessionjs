@@ -1,7 +1,7 @@
 import { Signature } from "./signature";
 import { SessionStore } from "./sessionStore";
 import { RequestCookies, ResponseCookies } from "./cookies";
-import { Result, Nil } from "./util";
+import { Result } from "./util";
 import { DateTime } from "./DateTime";
 import { SessionState } from "./sessionState";
 
@@ -82,25 +82,26 @@ export class EdgeSession<
   async get<S extends SessionState<any, any, false>>(
     cookies: ReqC | ResC,
     label: S["key"]
-  ): Promise<Result<string | Nil, E>> {
+  ): Promise<Result<S["value"] | undefined, E>> {
     const id = await this.sessionIdFromCookies(cookies);
     if (!id) return { success: true, data: undefined };
+
     return this.store.get(this.index(id, "data", label));
   }
 
   async commit<S extends SessionState<any, any, false>>(
     cookies: ResC,
     label: S["key"],
-    value: S["value"] | undefined,
+    value: S["value"] | null,
     expiresIn: DateTime = DateTime.now().plus({ months: 1 })
   ): Promise<Result<void, E>> {
     const sessionId = await this.putSessionIdToCookies(cookies, expiresIn);
     const key = this.index(sessionId, "data", label);
 
-    if (value === undefined || value === null) {
+    if (value === null) {
       return this.store.del(key);
     } else {
-      return this.store.set(key, value.toString());
+      return this.store.set(key, value);
     }
   }
 
@@ -131,7 +132,7 @@ export class EdgeSession<
   async getFlash<S extends SessionState<any, any, true>>(
     cookies: ReqC | ResC,
     label: S["key"]
-  ): Promise<Result<unknown, E>> {
+  ): Promise<Result<S["value"] | undefined, E>> {
     const sessionId = await this.sessionIdFromCookies(cookies);
     if (!sessionId) return { success: true, data: undefined };
 
@@ -143,23 +144,25 @@ export class EdgeSession<
     const res2 = await this.store.del(index);
     if (!res2.success) return res2;
 
-    return { success: true, data: res.data || undefined };
+    return res;
   }
 
   async commitFlash<S extends SessionState<any, any, true>>(
     cookies: ResC,
     label: S["key"],
-    value: S["value"] | Nil,
+    value: S["value"] | null,
     lifetime: number = 120
   ): Promise<Result<void, E>> {
-    if (value === undefined || value === null)
-      return { success: true, data: undefined };
     const sessionId = await this.putSessionIdToCookies(
       cookies,
       DateTime.now().plus({ seconds: lifetime })
     );
-    const index = this.index(sessionId, "flash", label);
+    const key = this.index(sessionId, "flash", label);
 
-    return this.store.set(index, value.toString());
+    if (value === null) {
+      return this.store.del(key);
+    } else {
+      return this.store.set(key, value);
+    }
   }
 }
