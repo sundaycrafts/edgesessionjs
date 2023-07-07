@@ -1,7 +1,8 @@
 import type { SessionStore } from "edgesession";
-import type { Nil, Result } from "edgesession/util";
-import { tri } from "edgesession/util";
-import { VercelKV } from "@vercel/kv";
+import type { Result } from "edgesession/util";
+import type { VercelKV } from "@vercel/kv";
+import { deserialize, isNil, tri } from "edgesession/util";
+import { StateValue } from "edgesession/stateValue";
 
 export class NextKvSessionStore implements SessionStore {
   constructor(private readonly client: VercelKV) {}
@@ -22,13 +23,15 @@ export class NextKvSessionStore implements SessionStore {
     })();
   }
 
-  async get(key: string): Promise<Result<string | Nil, Error>> {
+  async get(key: string): Promise<Result<StateValue | undefined, Error>> {
     const res = await tri<Error, string | null>(() => this.client.get(key))();
     if (!res.success) return res;
-    return { ...res, data: res.data ? JSON.stringify(res.data) : null };
+    if (isNil(res.data)) return { success: true, data: undefined };
+
+    return deserialize(res.data);
   }
 
-  async set(key: string, value: string): Promise<Result<void, Error>> {
+  async set(key: string, value: StateValue): Promise<Result<void, Error>> {
     return await tri<Error, void>(async () => {
       await this.client.set(key, value);
     })();
