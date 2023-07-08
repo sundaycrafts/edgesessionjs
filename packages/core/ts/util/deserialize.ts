@@ -5,10 +5,10 @@ import { Result } from "./result";
 
 export function deserialize(
   value: string
-): Result<ParsablePrimitives | JsonObject | JsonArray, Error> {
+): string | ParsablePrimitives | JsonObject | JsonArray {
   try {
-    return { success: true, data: JSON.parse(value) };
-  } catch (e) {
-    return { success: false, error: e as Error };
+    return JSON.parse(value);
+  } catch {
+    return value;
   }
 }
