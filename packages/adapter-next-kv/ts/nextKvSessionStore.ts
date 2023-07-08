@@ -32,8 +32,11 @@ export class NextKvSessionStore implements SessionStore {
     if (typeof res.data === "object")
       return { success: true, data: res.data ?? undefined };
 
-    // Prepare in case the specification of @vercel/kv is changed
-    return deserialize(res.data);
+    return {
+      success: true,
+      // deserialize for preparing in case the specification of @vercel/kv is changed
+      data: res.data === null ? undefined : deserialize(res.data),
+    };
   }
 
   async set(key: string, value: StateValue): Promise<Result<void, Error>> {
