@@ -28,6 +28,11 @@ export class NextKvSessionStore implements SessionStore {
     if (!res.success) return res;
     if (isNil(res.data)) return { success: true, data: undefined };
 
+    // @vercel/kv actually returns a object, not a string
+    if (typeof res.data === "object")
+      return { success: true, data: res.data ?? undefined };
+
+    // Prepare in case the specification of @vercel/kv is changed
     return deserialize(res.data);
   }
 
