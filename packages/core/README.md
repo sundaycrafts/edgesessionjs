@@ -39,17 +39,19 @@ export const session = new EdgeSession(
 
 ```ts
 // session-state.ts
+import { SessionState } from "edgesession";
 
 // Persistent session state
-interface UserId extends SessionState<"user_id"> {}
+export interface UserId extends SessionState<"user_id"> {}
 
 // Flash (one-time) session state
-interface SubmissionResult extends SessionState<"submission_result", "success" | "failed", true> {}
+export interface SubmissionResult extends SessionState<"submission_result", "success" | "failed", true> {}
 ```
 
 ```ts
 // your-entrypoint.ts
-import { session } from "session";
+import { session } from "./session";
+import { UserId, SubmissionResult } from "./session-state";
 
 export async function getSessionData() {
     const res = await session.get<UserId>(cookies(), "user_id");
